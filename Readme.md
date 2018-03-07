@@ -1,5 +1,7 @@
 # DecodeThis
 
+[![Build Status](https://travis-ci.org/myxaluch/decode_this.svg?branch=master)](https://travis-ci.org/myxaluch/decode_this)
+
 Simple decoder JWT token by given key
 
 ## Installation
@@ -23,14 +25,20 @@ Or install it yourself as:
 Configuration file scheme:
 ```
 test:
-  algorightm: 'RS256'
+  algorithm: 'RS256'
   path: 'paht/to/keys'
 ```
 
 ```ruby
-token = DecodeThis.call(token, config_file: '/path/to/config.yml', env: :my_env)
-token['field1']
-token['field2']
+payload = {
+  'field1' => 'foo',
+  'field2' => 'bar'
+}
+jwt_token = JWT.encode(payload, private_token, true, algorithm: algorithm)
+...
+decoded_token = DecodeThis.call(jwt_token, config_file: '/path/to/config.yml', env: :my_env)
+token['field1'] = 'foo'
+token['field2'] = 'bar'
 ```
 
 ## Contributing
