@@ -36,7 +36,7 @@ payload = {
 }
 jwt_token = JWT.encode(payload, private_token, true, algorithm: algorithm)
 ...
-decoded_token = DecodeThis.call(jwt_token, config_file: '/path/to/config.yml', env: :my_env)
+decoded_token = DecodeThis.decode(jwt_token, config_file: '/path/to/config.yml', env: :my_env, logger: logger)
 token['field1'] = 'foo'
 token['field2'] = 'bar'
 ```

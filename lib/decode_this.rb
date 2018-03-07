@@ -17,17 +17,17 @@ class DecodeThis
     @logger = logger
   end
 
-  def call
+  def decode
     JWT.decode(token, public_key, true, algorithm: algorithm).first
 
   rescue JWT::ExpiredSignature => err
-    logger.warn("Expired JWT token #{err.class} - #{err.message}")
+    logger.warn("Expired JWT token #{err.class} - #{err.message}") if logger
     raise DecodeError
   rescue JWT::VerificationError => err
-    logger.warn("Can't verify JWT token #{err.class} - #{err.message}")
+    logger.warn("Can't verify JWT token #{err.class} - #{err.message}") if logger
     raise DecodeError
   rescue JWT::DecodeError => err
-    logger.warn("Can't decode JWT token '#{jwt_token}' #{err.class} - #{err.message}")
+    logger.warn("Can't decode JWT token '#{jwt_token}' #{err.class} - #{err.message}") if logger
     raise DecodeError
   end
 

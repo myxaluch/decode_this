@@ -6,7 +6,7 @@ RSpec.describe DecodeThis do
   let(:payload) { { field: 'foobar' } }
   let(:token) { encode(payload) }
 
-  subject(:decoded_token) { described_class.new(token, config_file: config_path, env: :test).call }
+  subject(:decoded_token) { described_class.new(token, config_file: config_path, env: :test).decode }
 
   it 'decodes given token correctly' do
     payload.keys.each do |key|
