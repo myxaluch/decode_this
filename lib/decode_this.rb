@@ -52,7 +52,7 @@ class DecodeThis
   def pem
     keys_absolute_path = File.expand_path(jwt_config.path)
 
-    raise KeyFileNotFoundError.new("Cannot found file in #{jwt_config.path}") unless File.readable?(keys_absolute_path)
+    raise ConfigFileNotFoundError.new("Cannot found file in #{jwt_config.path}") unless File.readable?(keys_absolute_path)
     File.read(jwt_config.path)
   end
 end
