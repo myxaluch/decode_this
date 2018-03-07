@@ -8,12 +8,13 @@ class DecodeThis
   ConfigFileNotFoundError = Class.new(RuntimeError)
   DecodeError = Class.new(RuntimeError)
 
-  attr_reader :token, :config_file, :env
+  attr_reader :token, :config_file, :env, :logger
 
-  def initialize(token, config_file:, env:)
+  def initialize(token, config_file:, env:, logger: nil)
     @token = token
     @config_file = config_file
     @env = env
+    @logger = logger
   end
 
   def call
