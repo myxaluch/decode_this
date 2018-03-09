@@ -30,24 +30,25 @@ test:
   authorization_scheme: 'Bearer'
   key_path: 'paht/to/keys'
 ```
-
+In code:
 ```ruby
 payload = {
   'field1' => 'foo',
   'field2' => 'bar'
 }
 jwt_token = JWT.encode(payload, private_key, true, algorithm: algorithm)
+response.headers['Authentication'] = "Bearer #{jwt_token}"
 ...
 header_value = request.env['HTTP_AUTHENTICATION'] // "Bearer fgjsgkjsfslfjg.."
-decoded_token = DecodeThis::Decoder.call(
+decoded_token = DecodeThis::Decoder.new(
   header_value,
   config_file: '/path/to/config.yml',
   env: :my_env,
   logger: logger
-)
+).call
 
-token['field1'] = 'foo'
-token['field2'] = 'bar'
+decoded_token['field1'] = 'foo'
+decoded_token['field2'] = 'bar'
 ```
 
 ## Contributing
