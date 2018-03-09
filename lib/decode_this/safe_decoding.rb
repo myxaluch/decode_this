@@ -22,7 +22,7 @@ module DecodeThis
     rescue JWT::DecodeError => err
       handle_and_log_error(
         DecodeThis::DecodeError,
-        "Can't decode token '#{jwt_token}' #{err.class} - #{err.message}",
+        "Can't decode token #{err.class} - #{err.message}",
         logger
       )
     rescue DecodeThis::KeyFileNotFoundError => err

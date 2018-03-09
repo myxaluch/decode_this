@@ -44,5 +44,14 @@ RSpec.describe DecodeThis::Decoder do
         expect { decoded_token }.to raise_error { DecodeThis::DecodeError }
       end
     end
+
+    context 'when raise error when try to decode incorrect token' do
+      let(:header_value) { 'hacker' }
+
+      it 'raises DecodeError' do
+        expect(logger).to receive(:warn).and_call_original
+        expect { decoded_token }.to raise_error { DecodeThis::DecodeError }
+      end
+    end
   end
 end
