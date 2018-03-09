@@ -1,6 +1,7 @@
 # DecodeThis
 
 [![Build Status](https://travis-ci.org/myxaluch/decode_this.svg?branch=master)](https://travis-ci.org/myxaluch/decode_this)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/182d13aea55106ba87a4/test_coverage)](https://codeclimate.com/github/myxaluch/decode_this)
 
 Simple decoder JWT token by given key
 
@@ -26,7 +27,8 @@ Configuration file scheme:
 ```
 test:
   algorithm: 'RS256'
-  path: 'paht/to/keys'
+  authorization_scheme: 'Bearer'
+  key_path: 'paht/to/keys'
 ```
 
 ```ruby
@@ -34,9 +36,16 @@ payload = {
   'field1' => 'foo',
   'field2' => 'bar'
 }
-jwt_token = JWT.encode(payload, private_token, true, algorithm: algorithm)
+jwt_token = JWT.encode(payload, private_key, true, algorithm: algorithm)
 ...
-decoded_token = DecodeThis.decode(jwt_token, config_file: '/path/to/config.yml', env: :my_env, logger: logger)
+header_value = request.env['HTTP_AUTHENTICATION'] // "Bearer fgjsgkjsfslfjg.."
+decoded_token = DecodeThis::Decoder.call(
+  header_value,
+  config_file: '/path/to/config.yml',
+  env: :my_env,
+  logger: logger
+)
+
 token['field1'] = 'foo'
 token['field2'] = 'bar'
 ```

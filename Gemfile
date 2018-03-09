@@ -2,5 +2,12 @@
 source 'https://rubygems.org'
 
 gemspec
-gem 'simplecov', require: false, group: :test
-gem 'simplecov-console', require: false, group: :test
+
+group :test do
+  gem 'simplecov', require: false
+  gem 'simplecov-console', require: false
+end
+
+group :development, :test do
+  gem 'pry-byebug'
+end
