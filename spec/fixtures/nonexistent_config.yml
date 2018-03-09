@@ -1,4 +1,4 @@
 test:
   algorithm: 'RS256'
   authorization_scheme: 'Bearer'
-  key_path: './spec/fixtures/unsecured.pem'
+  key_path: './spec/fixtures/notexistent.pem'
