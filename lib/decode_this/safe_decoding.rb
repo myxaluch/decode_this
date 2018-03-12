@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 module DecodeThis
-  KeyFileNotFoundError = Class.new(RuntimeError)
-  DecodeError = Class.new(RuntimeError)
+  BaseError = Class.new(RuntimeError)
+  KeyFileNotFoundError = Class.new(BaseError)
+  DecodeError = Class.new(BaseError)
 
   class SafeDecoding
     def self.call(logger = nil, &block)
