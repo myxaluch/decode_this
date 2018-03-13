@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 module DecodeThis
   BaseError = Class.new(RuntimeError)
+  ConfigFileNotFoundError = Class.new(BaseError)
   KeyFileNotFoundError = Class.new(BaseError)
   DecodeError = Class.new(BaseError)
 
   class SafeDecoding
-    def self.call(logger = nil, &block)
+    def self.call(logger, &block)
       block.call
 
     rescue JWT::ExpiredSignature => err
